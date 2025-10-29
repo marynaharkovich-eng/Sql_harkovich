@@ -1,3 +1,7 @@
+/*------------------------------------
+Задачи 1, 3, 6 - Приняты!
+*/------------------------------------
+
 --Output the number of movies in each category, sorted descending.
 
 select c.name, count (fc.film_id)
@@ -20,6 +24,13 @@ group by actor_name
 order by count(r.rental_id) desc
 limit 10;
 
+/*------------------------------------
+GROUP BY - что произойдёт если в базе буду актёры с одинаковыми именем и фамилией? 
+Попробуй использовать более корректную группировку.
+
+Нужен ли join к таблице film?
+*/------------------------------------
+
 --Output the category of movies on which the most money was spent.
 
 SELECT c.name as film_categoty, 
@@ -41,6 +52,10 @@ select * from
 left join inventory using(film_id))
 where inventory_id is NULL
 
+/*------------------------------------
+Попробуй без использования подзапроса и сравни результаты
+*/------------------------------------
+
 --Output the top 3 actors who have appeared the most in movies in the “Children” category. If several actors have the same number of movies, output all of them.
 
 SELECT a.first_name||' '||a.last_name as actor_name, 
@@ -54,6 +69,12 @@ group by actor_name, c.name
 order by  count(a.actor_id) desc
 limit 3;
 
+/*------------------------------------
+GROUP BY - замечание как и во второй задаче 
+Попробуй использовать более корректную группировку.
+
+Условие "If several actors have the same number of movies, output all of them" не соблюдено.
+*/------------------------------------
 
 --Output cities with the number of active and inactive customers (active - customer.active = 1). Sort by the number of inactive customers in descending order.
 
@@ -98,3 +119,8 @@ join address using (address_id)
 join city using (city_id)
 where city like '%-%'
 group by c.name, city
+
+/*------------------------------------
+Условие "the highest number of total rental hours" не соблюдено.
+Замечание по группировке как и в задачах выше
+*/------------------------------------
